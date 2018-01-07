@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--
+        ===
+        This comment should NOT be removed.
+
+        Charisma v2.0.0
+
+        Copyright 2012-2014 Muhammad Usman
+        Licensed under the Apache License v2.0
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        http://usman.it
+        http://twitter.com/halalit_usman
+        ===
+    -->
+    <meta charset="utf-8">
+    <title>登录公告</title>
+    <style>
+        /*#list>li,
+        #list1>li,
+        #list2>li {
+            list-style-type: none;
+            float: left;
+            margin-right: 3px;
+        }*/
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+    <meta name="author" content="Muhammad Usman">
+
+    <!-- The styles -->
+    <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet">
+
+    <link href="css/charisma-app.css" rel="stylesheet">
+    <link href='bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='css/jquery.noty.css' rel='stylesheet'>
+    <link href='css/noty_theme_default.css' rel='stylesheet'>
+    <link href='css/elfinder.min.css' rel='stylesheet'>
+    <link href='css/elfinder.theme.css' rel='stylesheet'>
+    <link href='css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='css/uploadify.css' rel='stylesheet'>
+    <link href='css/animate.min.css' rel='stylesheet'>
+    <link href='css/bootstrap-datetimepicker.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="css/webuploader.css">
+
+    <!-- jQuery -->
+    <script src="bower_components/jquery/jquery.min.js"></script>
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- The fav icon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+</head>
+
+<body>
+    <script src="common.js"></script>
+    <div class="ch-container">
+        <div class="row">
+            <div id="content" class="col-lg-10 col-sm-10">
+                <!-- content starts -->
+                <div>
+                    <div>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#">登录公告</a>
+                            </li>
+                            <li>
+                                <a href="#">发布登录公告</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="box col-md-12">
+                        <div class="box-inner">
+                            <div class="box-header well" data-original-title="">
+                                <h2><i class="glyphicon glyphicon-plus"></i>编辑登录公告</h2>
+
+                                <div class="box-icon">
+                                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                class="glyphicon glyphicon-chevron-up"></i></a>
+                                </div>
+                            </div>
+                            <div class="box-content">
+                                <form class="form-horizontal" role="form" style="" action="">
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">选择区服</label>
+                                        <div class="col-sm-1">
+                                            <button class="btn btn-default" type="button" onclick="showServer()">请选择</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">登录公告标题</label>
+                                        <div class="col-sm-3">
+                                            <input class="form-control" id="title" type="text" placeholder="请输入公告标题...">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">登录公告内容</label>
+                                        <div class="col-sm-4">
+                                            <textarea name="" id="bulletin_content" cols="40" rows="5"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">开始时间</label>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" id="start" type="text" placeholder="请输入开始时间.">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">结束时间</label>
+                                        <div class="col-sm-2">
+                                            <input class="form-control" id="end" type="text" placeholder="请输入结束时间.">
+                                        </div>
+                                    </div>
+                                    <!--<div class="form-group">
+                                        <label class="col-sm-1 control-label">图片</label>
+                                        <div class="col-sm-2">
+                                            <div id="uploadimg">
+                                                <div id="fileList" class="uploader-list"></div>
+                                                <div id="imgPicker">选择图片</div>
+                                            </div>
+                                        </div>
+                                    </div>-->
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-1 col-sm-1">
+                                            <button type="submit" class="btn btn-primary" id="save">保存</button>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="" value="" id="broadcast">
+                                </form>
+
+
+                            </div>
+                            <!-- 模态框（Modal） -->
+                            <div class="modal fade" id="myModalxxx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <!--<div class="modal-header" style="border-bottom:0">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">选择区服</h4>
+                                        </div>-->
+                                        <!--可进行公共部分的区服选择-->
+                                        <script src="commonModal_pipe.js"></script>
+
+
+                                        <!--区服内容结束-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.modal -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--/.fluid-container-->
+
+    <!-- external javascript -->
+
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- library for cookie management -->
+    <script src="js/jquery.cookie.js"></script>
+    <!-- calender plugin -->
+    <script src='bower_components/moment/min/moment.min.js'></script>
+    <script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+    <!-- data table plugin -->
+    <script src='js/jquery.dataTables.min.js'></script>
+
+    <!-- select or dropdown enhancer -->
+    <script src="bower_components/chosen/chosen.jquery.min.js"></script>
+    <!-- plugin for gallery image view -->
+    <script src="bower_components/colorbox/jquery.colorbox-min.js"></script>
+    <!-- notification plugin -->
+    <script src="js/jquery.noty.js"></script>
+    <!-- library for making tables responsive -->
+    <script src="bower_components/responsive-tables/responsive-tables.js"></script>
+    <!-- tour plugin -->
+    <script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+    <!-- star rating plugin -->
+    <script src="js/jquery.raty.min.js"></script>
+    <!-- for iOS style toggle switch -->
+    <script src="js/jquery.iphone.toggle.js"></script>
+    <!-- autogrowing textarea plugin -->
+    <script src="js/jquery.autogrow-textarea.js"></script>
+    <!-- multiple file upload plugin -->
+    <script src="js/jquery.uploadify-3.1.min.js"></script>
+    <!-- history.js for cross-browser state change on ajax -->
+    <script src="js/jquery.history.js"></script>
+    <!-- application script for Charisma demo -->
+    <script src="js/charisma.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script type="text/javascript" src="js/webuploader.min.js"></script>
+    <script src="commonModal_pipeJS"></script>
+
+
+</body>
+<script>
+
+        $("#start").datetimepicker({
+            language: 'zh-CN',
+            todayBtn: true
+        })
+        $("#end").datetimepicker({
+            language: 'zh-CN',
+            todayBtn: true
+        })
+
+        function showServer() {
+
+            $("#myModalxxx").modal('show');
+        }
+
+        //保存form表单事件
+        $("#save").click(function () {
+
+            //渠道
+            var arr = [];
+            $.each($("#form_form_id tr input[type=checkbox]"), function (i, item) {
+                if ($(item)[0].checked == true) {
+                    // arr.push($(item).val());
+                    console.log($(item).val());
+                }
+                console.log($(item)[0].checked); //能获取所选的input;
+            });
+
+            $.ajax({
+                url: '', //需传给后台的地址
+                data: {
+                    //前（键）：后台名字  后（值）：html页面上对应的id名字
+                    "arr": arr,
+                    "title": $("#title").val(),
+                    "bulletin_content": $("#bulletin_content").val(),
+                    "start": $("#start").val(),
+                    "end": $("#end").val(),
+                },
+                dataType: 'json',
+                type: 'post',
+                success: function (msg) {
+                    // if(msg.status == 1){   //返回的status=1表示修改成功 及关闭修改模态框 提示修改成功
+                    //     $("#edit_user_info").modal('hide');
+                    // }
+                    if (msg == "1") {
+                        alert("保存成功");
+                        //把表单里的值进行清空 
+                        // $("#title").val("");
+                        // $("#bulletin_content").val("");
+                        // $("#start").val("");
+                        // $("#end").val("");
+                        location.href="loginBulletinTable.html";
+                    }
+
+                }
+
+            })
+        });
+
+        //修改和编辑公用一个html
+        //截取url里的id
+        var str = location.href.split("?");
+        if (str.length > 1) {
+            $.ajax({
+                url: 'http://10.0.0.140:81/GameNotice/GetGameNoticeById',
+                data: {id: str[1]},   //str[1]  从url里面获取的id
+                dataType: 'json',
+                type: 'get',
+                success: function (msg) {
+                    // alert(msg);
+                    //  $('#broadcast').val(res.NoticeID);
+                    $('#broadcast').val(str[1]);
+                    if (null != msg) {
+                        // var res=JSON.parse(msg);
+                        // alert(res)
+                        //取url内的值 进行赋值
+                        $('#bulletin_title').val(msg.NoticeTitle);
+                        $("#bulletin_content").val(msg.NoticeContent);
+                        $("#start").val(msg.NoticeStartTime);
+                        $("#end").val(msg.NoticeEndTime);
+                    }
+                }
+            })
+        }else{
+            location.href="loginBulletinTable.html";
+        }
+
+
+        //渠道和服务器传参函数 **---获取后台给的值
+        function panel(url, id) {
+            $.ajax({
+                url: url,
+                dataType: 'json',
+                type: 'get',
+                success: function (msg) {
+                    if (!mag) {
+                        $("#" + id).children().remove();
+                        var t = JSON.parse(msg); //转换成json
+                        var html = '';
+                        $.each(t, function (i, item) {
+                            html += '<h5>' + item.title +
+                                '<input type="checkbox" class="all"></h5>';
+                            html += '<table>'
+                            $.each(item, function (i1, item1) {
+                                html += '<td><input type="checkbox" value="' + item
+                                    .Value +
+                                    '" name="platform" id="" /></td><td><label>' +
+                                    item.Name +
+                                    '</label></td>';
+                            })
+                            html += '</table>';
+                        })
+                        $("#" + id).append(html);
+                    }
+
+                }
+
+            });
+        }
+
+
+</script>
+
+</html>

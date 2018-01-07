@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--
+        ===
+        This comment should NOT be removed.
+
+        Charisma v2.0.0
+
+        Copyright 2012-2014 Muhammad Usman
+        Licensed under the Apache License v2.0
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        http://usman.it
+        http://twitter.com/halalit_usman
+        ===
+    -->
+    <meta charset="utf-8">
+    <title>角色查询</title>
+    <style>
+        #list>li {
+            list-style-type: none;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+    <meta name="author" content="Muhammad Usman">
+
+    <!-- The styles -->
+    <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet">
+
+    <link href="css/charisma-app.css" rel="stylesheet">
+    <link href='bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='css/jquery.noty.css' rel='stylesheet'>
+    <link href='css/noty_theme_default.css' rel='stylesheet'>
+    <link href='css/elfinder.min.css' rel='stylesheet'>
+    <link href='css/elfinder.theme.css' rel='stylesheet'>
+    <link href='css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='css/uploadify.css' rel='stylesheet'>
+    <link href='css/animate.min.css' rel='stylesheet'>
+
+    <!-- jQuery -->
+    <script src="bower_components/jquery/jquery.min.js"></script>
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- The fav icon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+</head>
+
+<body>
+    <script src="common.js"></script>
+    <div class="ch-container">
+        <div class="row">
+            <div id="content" class="col-lg-10 col-sm-10">
+                <!-- content starts -->
+                <div>
+                    <div>
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#">Home</a>
+                            </li>
+                            <li>
+                                <a href="#">Dashboard</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="box col-md-12">
+                        <div class="box-inner">
+                            <div class="box-header well" data-original-title="">
+                                <h2><i class="glyphicon glyphicon-plus"></i>角色查询</h2>
+                                <div class="box-icon">
+                                    <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                class="glyphicon glyphicon-chevron-up"></i></a>
+                                </div>
+                            </div>
+
+                            <div class="box-content">
+                                <form class="form-horizontal" role="form" style="" action="">
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">选择区服</label>
+                                        <div class="col-sm-1">
+                                            <button class="btn btn-default" type="button" onclick="showServer()">请选择</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-1 control-label">充值</label>
+                                        <div class="col-sm-1">
+                                            <input type="text" class="form-control">
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label class="col-sm-1 control-label">上阵英雄</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" type="text">
+                                                <option value="0">编码1</option>
+                                                <option value="1">编码2</option>
+                                                <option value="2">编码3</option>
+                                                <option value="0">编码4</option>
+                                                <option value="0">编码5</option>
+                                            </select>
+                                        </div>
+                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">上阵装备</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" type="text">
+                                                <option value="0">按等级筛选</option>
+                                                <option value="1">01级</option>
+                                                <option value="2">10级</option>
+                                                <option value="0">15级</option>
+                                                <option value="1">20级</option>
+                                                <option value="2">25级</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" type="text">
+                                                <option value="0">按职业筛选</option>
+                                                <option value="1">射手</option>
+                                                <option value="2">突进</option>
+                                                <option value="0">法师</option>
+                                                <option value="1">常用</option>
+                                                <option value="2">刺客</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" type="text">
+                                                <option value="0">装备类型</option>
+                                                <option value="1">帽子</option>
+                                                <option value="2">靴子</option>
+                                                <option value="0">手套</option>
+                                                <option value="1">披风</option>
+                                                <option value="2">裤子</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">道具</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" type="text">
+                                                <option value="0">背包道具</option>
+                                                <option value="1">宝石</option>
+                                                <option value="2">药物</option>
+                                                <option value="0">宠物食品</option>
+                                                <option value="1">丹药</option>
+                                                <option value="2">技能书</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-1 control-label">拥有英雄</label>
+                                        <div class="col-sm-2">
+                                            <select class="form-control" type="text">
+                                                <option value="0">拥有1</option>
+                                                <option value="1">拥有2</option>
+                                                <option value="2">拥有3</option>
+                                                <option value="0">拥有4</option>
+                                                <option value="0">拥有5</option>
+                                            </select>
+                                        </div>
+                                     </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-1 col-sm-1">
+                                            <button type="submit" class="btn btn-primary">保存</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                            <!-- 模态框（Modal） -->
+                            <!-- 模态框（Modal） -->
+                            <div class="modal fade" id="myModalxxx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <!--<div class="modal-header" style="border-bottom:0">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">选择区服</h4>
+                                        </div>-->
+                                        <!--可进行公共部分的区服选择-->
+                                        <!--<script src="commonModal_pipe.js"></script>-->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">选择区服</h4>
+                                        </div>
+                                        <div class="modal-body" style="font-size:12px;">
+                                            <form class="form-horizontal" role="form" style="" action="">
+                                                <table style="width:100%;border-bottom:1px dashed gray">
+                                                    <style>
+                                                        body,
+                                                        th,
+                                                        td {
+                                                            margin: 0;
+                                                            padding: 0
+                                                        }
+
+                                                        table {
+                                                            border-collapse: collapse;
+                                                            border-spacing: 0
+                                                        }
+                                                    </style>
+                                                    <h5>360区
+                                                        <input type="checkbox" id="all">
+                                                        <!--<input type="button" value="全选" class="btn" id="selectAll">
+                                                    <input type="button" value="全不选" class="btn" id="unSelect">
+                                                    <input type="button" value="反选" class="btn" id="reverse">
+                                                    <input type="button" value="获得选中的所有值" class="btn" id="getValue">-->
+                                                    </h5>
+                                                    <tr id="list">
+                                                        <td><input type="checkbox" value="1" name="platform" id="" /></td>
+                                                        <td><label>58-s1</label></td>
+                                                        <td><input type="checkbox" value="2" name="platform" id="" /></td>
+                                                        <td><label>58-s2</label></td>
+                                                        <td><input type="checkbox" value="3" name="platform" id="" /></td>
+                                                        <td><label>58-s3</label></td>
+                                                        <td><input type="checkbox" value="4" name="platform" id="" /></td>
+                                                        <td><label>58-s4</label></td>
+                                                        <td><input type="checkbox" value="5" name="platform" id="" /></td>
+                                                        <td><label>58-s5</label></td>
+                                                        <td><input type="checkbox" value="6" name="platform" id="" /></td>
+                                                        <td><label>58玩跨服7-9</label></td>
+                                                    </tr>
+                                                </table>
+                                                <table style="width:100%;border-bottom:1px dashed gray">
+                                                    <style>
+                                                        body,
+                                                        th,
+                                                        td {
+                                                            margin: 0;
+                                                            padding: 0
+                                                        }
+
+                                                        table {
+                                                            border-collapse: collapse;
+                                                            border-spacing: 0
+                                                        }
+                                                    </style>
+                                                    <h5>QQ联盟区
+                                                        <input type="checkbox" id="all2">
+                                                        <!--<input type="button" value="全选" class="btn" id="selectAll2">
+                                                    <input type="button" value="全不选" class="btn" id="unSelect2">
+                                                    <input type="button" value="反选" class="btn" id="reverse2">
+                                                    <input type="button" value="获得选中的所有值" class="btn" id="getValue2">-->
+                                                    </h5>
+                                                    <tr id="list2">
+                                                        <td><input type="checkbox" value="1" class="" name="platform" id="" /></td>
+                                                        <td><label>QQ联盟-S111</label></td>
+                                                        <td><input type="checkbox" value="2" class="" name="platform" id="" /></td>
+                                                        <td><label>QQ联盟-S112</label></td>
+                                                        <td><input type="checkbox" value="3" class="" name="platform" id="" /></td>
+                                                        <td><label>QQ联盟-S113</label></td>
+                                                        <td><input type="checkbox" value="4" class="" name="platform" id="" /></td>
+                                                        <td><label>QQ联盟-S114</label></td>
+                                                        <td><input type="checkbox" value="5" class="" name="platform" id="" /></td>
+                                                        <td><label>QQ联盟-S115</label></td>
+                                                        <td><input type="checkbox" value="6" class="" name="platform" id="" /></td>
+                                                        <td><label>QQ联盟-S116</label></td>
+                                                    </tr>
+                                                </table>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">确定</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <!--区服内容结束-->
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- /.modal -->
+                        <!-- /.modal -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <!--/.fluid-container-->
+
+    <!-- external javascript -->
+
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- library for cookie management -->
+    <script src="js/jquery.cookie.js"></script>
+    <!-- calender plugin -->
+    <script src='bower_components/moment/min/moment.min.js'></script>
+    <script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+    <!-- data table plugin -->
+    <script src='js/jquery.dataTables.min.js'></script>
+
+    <!-- select or dropdown enhancer -->
+    <script src="bower_components/chosen/chosen.jquery.min.js"></script>
+    <!-- plugin for gallery image view -->
+    <script src="bower_components/colorbox/jquery.colorbox-min.js"></script>
+    <!-- notification plugin -->
+    <script src="js/jquery.noty.js"></script>
+    <!-- library for making tables responsive -->
+    <script src="bower_components/responsive-tables/responsive-tables.js"></script>
+    <!-- tour plugin -->
+    <script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+    <!-- star rating plugin -->
+    <script src="js/jquery.raty.min.js"></script>
+    <!-- for iOS style toggle switch -->
+    <script src="js/jquery.iphone.toggle.js"></script>
+    <!-- autogrowing textarea plugin -->
+    <script src="js/jquery.autogrow-textarea.js"></script>
+    <!-- multiple file upload plugin -->
+    <script src="js/jquery.uploadify-3.1.min.js"></script>
+    <!-- history.js for cross-browser state change on ajax -->
+    <script src="js/jquery.history.js"></script>
+    <!-- application script for Charisma demo -->
+    <script src="js/charisma.js"></script>
+
+
+</body>
+<script>
+    $("#start").datetimepicker({
+        language: 'zh-CN',
+        todayBtn: true
+    })
+    $("#end").datetimepicker({
+        language: 'zh-CN',
+        todayBtn: true
+    })
+
+    function showServer() {
+
+        $("#myModalxxx").modal('show');
+    }
+
+
+    $(function () {
+        //全选或全不选
+        $("#all").click(function () {
+            if (this.checked) {
+                $("#list :checkbox").prop("checked", true);
+            } else {
+                $("#list :checkbox").prop("checked", false);
+            }
+        });
+        //全选  
+        $("#selectAll").click(function () {
+            $("#list :checkbox,#all").prop("checked", true);
+        });
+        //全不选
+        $("#unSelect").click(function () {
+            $("#list :checkbox,#all").prop("checked", false);
+        });
+        //反选 
+        $("#reverse").click(function () {
+            $("#list :checkbox").each(function () {
+                $(this).prop("checked", !$(this).prop("checked"));
+            });
+            allchk();
+        });
+
+        //设置全选复选框
+        $("#list :checkbox").click(function () {
+            allchk();
+        });
+
+        //获取选中选项的值
+        $("#getValue").click(function () {
+            var valArr = new Array;
+            //获取所有选中的checked
+            $("#list :checkbox[checked]").each(function (i) {
+                valArr[i] = $(this).val();
+            });
+            var vals = valArr.join(',');
+            alert(vals);
+        });
+    });
+
+    function allchk() {
+        var chknum = $("#list :checkbox").size(); //选项总个数
+        var chk = 0;
+        $("#list :checkbox").each(function () {
+            if ($(this).prop("checked") == true) {
+                chk++;
+            }
+        });
+        if (chknum == chk) { //全选
+            $("#all").prop("checked", true);
+        } else { //不全选
+            $("#all").prop("checked", false);
+        }
+    }
+</script>
+
+</html>

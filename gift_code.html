@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--
+        ===
+        This comment should NOT be removed.
+
+        Charisma v2.0.0
+
+        Copyright 2012-2014 Muhammad Usman
+        Licensed under the Apache License v2.0
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        http://usman.it
+        http://twitter.com/halalit_usman
+        ===
+    -->
+    <meta charset="utf-8">
+    <title>礼品码</title>
+    <style>
+        .center-div li{
+            list-style-type:none;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+    <meta name="author" content="Muhammad Usman">
+
+    <!-- The styles -->
+    <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet">
+
+    <link href="css/charisma-app.css" rel="stylesheet">
+    <link href='bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='css/jquery.noty.css' rel='stylesheet'>
+    <link href='css/noty_theme_default.css' rel='stylesheet'>
+    <link href='css/elfinder.min.css' rel='stylesheet'>
+    <link href='css/elfinder.theme.css' rel='stylesheet'>
+    <link href='css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='css/uploadify.css' rel='stylesheet'>
+    <link href='css/animate.min.css' rel='stylesheet'>
+    <link href='css/bootstrap-datetimepicker.min.css' rel='stylesheet'>
+
+    <!-- jQuery -->
+    <script src="bower_components/jquery/jquery.min.js"></script>
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- The fav icon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+</head>
+
+<body>
+    <script src="common.js"></script>
+
+    <div id="content" class="col-lg-10 col-sm-10">
+        <!-- content starts -->
+        <div>
+            <div>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">礼包码</a>
+                    </li>
+                    <li>
+                        <a href="#"> 发布礼包</a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="box col-md-12">
+                <div class="box-inner">
+                    <div class="box-header well">
+                        <h2> 发布礼包编辑</h2>
+                    </div>
+                    <div class="box-content">
+                        <form class="form-horizontal" role="form" style="" action="">
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">选择区服</label>
+                                <div class="col-sm-1">
+                                    <button class="btn btn-default" type="button" onclick="showServer()">请选择</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">渠道</label>
+                                <div class="col-sm-1">
+                                    <!--可全渠道使用，可限制渠道使用-->
+                                    <button class="btn btn-default" type="button" onclick="showServer1()">选择渠道</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">领取次数限制</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" id="number" type="text" placeholder="同一角色在同一批码最多使用一次">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">礼包名</label>
+                                <div class="col-sm-3">
+                                    <input class="form-control" id="code_name" type="text" placeholder="输入礼包名">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">礼包描述</label>
+                                <div class="col-sm-4">
+                                    <textarea name="" id="describe" cols="40" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">数量</label>
+                                <div class="col-sm-2">
+                                    <select class="form-control" type="text" id="selectCount">
+                                        <option value="0">1</option>
+                                        <option value="1">2</option>
+                                        <option value="2">3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-1 control-label">内容</label>
+                                <!--<div class="col-sm-1">
+                                    <button class="btn btn-default" type="button" onclick="showServer()">道具Id和数量</button>
+                                </div>-->
+                                <div class="col-sm-4">
+                                    <div class="center-div" style="max-height: 300px;max-width: 900px;word-break: keep-all;white-space: nowrap;overflow: scroll;text-overflow: ellipsis;">
+                                        <ul>
+                                            <div class="radio" id="content_ul">
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5003">
+                                                        <span title="【4399专属大礼包】礼包内容：次级治疗药水*50次级魔法药水*50金桃*1新手礼包（40级）*1">【4399专属大礼包】礼包内容：次级治疗药水*50次级魔法药水*50金桃*1新手礼包（40级）*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label>
+                                                        <input type="radio" name="items" class="checkbox" value="5000">
+                                                        <span title="【Q群大礼包】礼包内容：琥珀*1洗炼石*1">【Q群大礼包】礼包内容：琥珀*1洗炼石*1</span>
+                                                    </label>
+                                                </li>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="form-group">
+                                    <label class="col-sm-1 control-label">有效期</label>
+                                    <div class="col-sm-2">
+                                        <input class="form-control" id="start" type="text" placeholder="请输入开始时间.">
+                                    </div>
+                                    <div class="col-sm-2">
+                                        <input class="form-control" id="end" type="text" placeholder="请输入结束时间.">
+                                    </div>
+                                    <!--<span class="tr-two-span" style="color: red;height: 30px;line-height: 30px;margin-left: 10px;">(过期时间不能少于1天)</span>-->
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-1 col-sm-1">
+                                        <button type="submit" class="btn btn-primary" id="save">保存</button>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="" value="" id="broadcast">
+                        </form>
+                        </div>
+
+                        <!-- 模态框（Modal） -->
+                        <div class="modal fade" id="myModalxxx" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <script src="commonModal_pipe.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.modal -->
+
+
+                         <!-- 模态框（Modal） -->
+                        <div class="modal fade" id="myModalxxx1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <script src="commonModal_pipe1.js"></script>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.modal -->
+                    </div>
+                </div>
+                <!--/span-->
+
+            </div>
+            <!--/row-->
+
+            <!-- content ends -->
+        </div>
+        <!--/#content.col-md-0-->
+
+        <!-- external javascript -->
+
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+        <!-- library for cookie management -->
+        <script src="js/jquery.cookie.js"></script>
+        <!-- calender plugin -->
+        <script src='bower_components/moment/min/moment.min.js'></script>
+        <script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+        <!-- data table plugin -->
+        <script src='js/jquery.dataTables.min.js'></script>
+
+        <!-- select or dropdown enhancer -->
+        <script src="bower_components/chosen/chosen.jquery.min.js"></script>
+        <!-- plugin for gallery image view -->
+        <script src="bower_components/colorbox/jquery.colorbox-min.js"></script>
+        <!-- notification plugin -->
+        <script src="js/jquery.noty.js"></script>
+        <!-- library for making tables responsive -->
+        <script src="bower_components/responsive-tables/responsive-tables.js"></script>
+        <!-- tour plugin -->
+        <script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+        <!-- star rating plugin -->
+        <script src="js/jquery.raty.min.js"></script>
+        <!-- for iOS style toggle switch -->
+        <script src="js/jquery.iphone.toggle.js"></script>
+        <!-- autogrowing textarea plugin -->
+        <script src="js/jquery.autogrow-textarea.js"></script>
+        <!-- multiple file upload plugin -->
+        <script src="js/jquery.uploadify-3.1.min.js"></script>
+        <!-- history.js for cross-browser state change on ajax -->
+        <script src="js/jquery.history.js"></script>
+        <!-- application script for Charisma demo -->
+        <script src="js/charisma.js"></script>
+        <script src="js/bootstrap-datetimepicker.min.js"></script>
+        <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+        <script src="commonModal_pipeJS.js"></script>
+
+
+</body>
+<script>
+    $("#start").datetimepicker({
+        language: 'zh-CN',
+        todayBtn: true
+    })
+    $("#end").datetimepicker({
+        language: 'zh-CN',
+        todayBtn: true
+    })
+
+    function showServer() {
+        panel("url", "#form_form_id");
+        $("#myModalxxx").modal('show');
+    }
+
+    function showServer1() {
+        panel("url", "#form_form_id1");
+        $("#myModalxxx1").modal('show');
+    }
+
+    //保存form表单事件
+    $("#save").click(function () {
+
+        //渠道
+        var arr = [];
+        $.each($("#form_form_id tr input[type=checkbox]"), function (i, item) {
+            if ($(item)[0].checked == true) {
+                // arr.push($(item).val());
+                console.log($(item).val());
+            }
+            console.log($(item)[0].checked); //能获取所选的input;
+        });
+        //服务器
+        var arr1 = [];
+        $.each($("#form_form_id1 tr input[type=checkbox]"), function (i, item) {
+            if ($(item)[0].checked == true) {
+                arr.push($(item).val());
+                console.log($(item).val());
+            }
+            //console.log($(item)[0].checked); //能获取所选的input;
+        });
+
+        $.ajax({
+            url: '', //需传给后台的地址
+            data: {
+                //前（键）：后台名字  后（值）：html页面上对应的id名字
+                "arr": arr, 
+                "arr1": arr1,
+                "number": $("#number").val(), 
+                "code_name": $("#code_name").val(), 
+                "describe":$("#describe").val(),
+                "selectCount":$("#selectCount").val(),
+                "content_ul":$("#content_ul").val(),
+                "start": $("#start").val(),
+                "end": $("#end").val(),
+            },
+            dataType: 'json',
+            type: 'post',
+            success: function (msg) {
+                // if(msg.status == 1){   //返回的status=1表示修改成功 及关闭修改模态框 提示修改成功
+                //     $("#edit_user_info").modal('hide');
+                // }
+                if(msg=="1"){
+                    alert("保存成功");
+                    //把表单里的值进行清空 
+                    // $("#number").val("");
+                    // $("#code_name").val("");
+                    // $("#describe").val("");
+                    // $("#selectCount").val("");
+                    // $("#content_ul").val("");
+                    // $("#start").val("");
+                    // $("#end").val("");
+                    location.href="gift_code_table.html"
+                }
+
+            }
+
+        })
+    });
+
+        //修改和编辑公用一个html
+        //截取url里的id
+        var str = location.href.split("?");
+        if (str.length > 1) {
+            $.ajax({
+                url: 'http://10.0.0.140:81/',
+                data: {id: str[1]},   //str[1]  从url里面获取的id
+                dataType: 'json',
+                type: 'get',
+                success: function (msg) {
+                    // alert(msg);
+                    //  $('#broadcast').val(res.NoticeID);
+                    $('#broadcast').val(str[1]);
+                    if (null != msg) {
+                        // var res=JSON.parse(msg);
+                        // alert(res)
+                        //取url内的值 进行赋值
+                        $('#bulletin_title').val(msg.NoticeTitle);
+                        $("#bulletin_content").val(msg.NoticeContent);
+                        $("#start").val(msg.NoticeStartTime);
+                        $("#end").val(msg.NoticeEndTime);
+                    }
+                }
+            })
+        }else{
+            location.href="gift_code_table.html";
+        }
+
+
+     //渠道和服务器传参函数 **---获取后台给的值
+    function panel(url, id) {
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            type: 'get',
+            success: function (msg) {
+                if (!mag) {
+                    $("#" + id).children().remove();
+                    var t = JSON.parse(msg); //转换成json
+                    var html = '';
+                    $.each(t, function (i, item) {
+                        html += '<h5>' + item.title + '<input type="checkbox" class="all"></h5>';
+                        html += '<table>'
+                        $.each(item, function (i1, item1) {
+                            html += '<td><input type="checkbox" value="' + item.Value +
+                                '" name="platform" id="" /></td><td><label>' + item.Name +
+                                '</label></td>';
+                        })
+                        html += '</table>';
+                    })
+                    $("#" + id).append(html);
+                }
+
+            }
+
+        });
+    }
+
+     //活动类型下拉框获取数据 传输数据事件
+    function selectEvent(){ 
+      //清空原有select内的数据
+      $("#selectCount").empty();
+      $.ajax({ 
+          url:"" , 
+          type:"get" , 
+          dataType:"json",
+          success:function(data){
+              $("#selectCount").append("<option value='-1'>--请选择--</option>");
+              //遍历 json为{id:"00",text:"aa".....},{id:"01",text:"bb".....}
+              $.each(data, function (index, item) {  
+                  var id = data[index].id; 
+                  var text = data[index].text; 
+                  $("#selectCount").append("<option value='"+id+"'>"+text+"</option>");
+              }); 
+             }, 
+            // error:function(XMLHttpRequest,textStatus, errorThrown) { 
+          // alert(errorThrown);
+        //  }
+      });
+    }
+    
+</script>
+
+</html>

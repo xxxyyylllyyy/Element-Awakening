@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <!--
+        ===
+        This comment should NOT be removed.
+
+        Charisma v2.0.0
+
+        Copyright 2012-2014 Muhammad Usman
+        Licensed under the Apache License v2.0
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        http://usman.it
+        http://twitter.com/halalit_usman
+        ===
+    -->
+    <meta charset="utf-8">
+    <title>登录公告</title>
+    <style>
+        .confirm-model {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999;
+            background-color: rgba(55, 55, 55, .6);
+        }
+
+        .confirm-model {
+            display: none;
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            width: 507px;
+            margin-left: -254px;
+        }
+
+        .d-dialog {
+            background-color: gray !important;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+    <meta name="author" content="Muhammad Usman">
+
+    <!-- The styles -->
+    <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet">
+
+    <link href="css/charisma-app.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href='bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='bower_components/bootstrap-table/bootstrap-table.min.css' rel='stylesheet'>
+    <link href='css/jquery.noty.css' rel='stylesheet'>
+    <link href='css/noty_theme_default.css' rel='stylesheet'>
+    <link href='css/elfinder.min.css' rel='stylesheet'>
+    <link href='css/elfinder.theme.css' rel='stylesheet'>
+    <link href='css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='css/uploadify.css' rel='stylesheet'>
+    <link href='css/bootstrap-datetimepicker.min.css' rel='stylesheet'>
+    <link href='css/animate.min.css' rel='stylesheet'>
+
+    <!-- jQuery -->
+    <script src="bower_components/jquery/jquery.min.js"></script>
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- The fav icon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+</head>
+
+<body>
+    <script src="common.js"></script>
+    <div class="ch-container">
+        <div class="row">
+            <div id="content" class="col-lg-10 col-sm-10">
+                <!-- content starts -->
+                <div>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">游戏内公告</a>
+                        </li>
+                        <li>
+                            <a href="#">游戏内公告列表</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <div class="box col-md-12">
+                        <div class="box-inner">
+                            <div class="portlet-body">
+                                <!-- 搜索区 -->
+                                <form class="slot-filter row" role="form" id="search_form" onsubmit="return false;">
+                                    <div class="slot-filter-date col-xs-6 col-sm-6 col-md-6 col-lg-2">
+                                        <!--<div class="form-group">-->
+                                        <input class="form-control" type="text" id="playerNum" placeholder="请输入标题">
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="slot-filter-date col-xs-6 col-sm-6 col-md-6 col-lg-2">
+                                        <input class="form-control" type="text" id="userID" placeholder="请输入服务器">
+                                    </div>
+                                    <!--<div class="slot-filter-date col-md-3">
+                                        <select id="indexSearch" class="form-control">
+                                            <option value="0">模糊查询</option>
+                                            <option value="1">111</option>
+                                            <option value="2">222</option>
+                                            <option value="3">333</option>
+                                        </select>
+                                    </div>-->
+
+                                    <div class="slot-filter-date col-xs-6 col-sm-6 col-md-6 col-lg-2 control-label">
+                                        <!--<div class="form-group">-->
+                                        <input class="form-control" id="start" type="text" placeholder="请输入开始时间." readonly>
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="slot-filter-date col-xs-6 col-sm-6 col-md-6 col-lg-2 control-label">
+                                        <!--<div class="form-group">-->
+                                        <input class="form-control" id="end" type="text" placeholder="请输入结束时间." readonly>
+                                        <!--</div>-->
+                                    </div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-3">
+                                        <button type="submit" class="btn btn-search" onclick='$("#table").bootstrapTable("refresh")'>查询</button>
+                                        <button type="reset" class="btn btn-default">清除</button>
+                                        <a id="add" class="btn btn-default">添加</a>
+                                    </div>
+
+                                </form>
+                                <!--table-->
+                                <div class="btn-group" id="tableToolbar">
+
+
+                                    <!--<button type="button" onclick="location.href='gameBulletinPlan.html'" class="btn btn-default">添加</button>
+                                        <button type="button" class="btn btn-default">Middle</button>
+                                        <button type="button" class="btn btn-default">Right</button>-->
+                                </div>
+                                <table id="table" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <!--<th data-field="prop">发布平台（渠道）</th>-->
+                                            <!--<th data-field="NoticeTitle ">游戏内公告标题</th>
+                                        <th data-field="create_content">游戏类公告内容</th>
+                                        <th data-field="create_time">创建时间</th>
+                                        <th data-field="create_start">开始时间</th>
+                                        <th data-field="create_end">结束时间</th>-->
+                                            <!--<th data-field="img">图片</th>-->
+                                            <!--<th data-field="operate" data-formatter="operate_formatter" data-align="center">操作</th>-->
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <!--/.table./-->
+
+                            </div>
+                        </div>
+                        <!--/span-->
+
+                    </div>
+                    <!--/row-->
+
+
+                    <!-- content ends -->
+                </div>
+                <!--/#content.col-md-0-->
+            </div>
+            <!--/fluid-row-->
+
+            <!-- Ad, you can remove it -->
+            <div class="row">
+                <div class="col-md-9 col-lg-9 col-xs-9 hidden-xs">
+                    <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+                    <!-- Charisma Demo 2 -->
+                    <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5108790028230107" data-ad-slot="3193373905"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                <div class="col-md-2 col-lg-3 col-sm-12 col-xs-12 email-subscription-footer">
+                    <!--<div class="mc_embed_signup">
+                    <form action="//halalit.us3.list-manage.com/subscribe/post?u=444b176aa3c39f656c66381f6&amp;id=eeb0c04e84" method="post" id="mc-embedded-subscribe-form"
+                        name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                        <div>
+                            <label>Keep up with my work</label>
+                            <input type="email" value="" name="EMAIL" class="email" placeholder="Email address" required>
+
+                            <div class="power_field"><input type="text" name="b_444b176aa3c39f656c66381f6_eeb0c04e84" tabindex="-1" value=""></div>
+                            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" class="button"></div>
+                        </div>
+                    </form>
+                </div>-->
+
+                    <!--End mc_embed_signup-->
+                </div>
+
+            </div>
+            <!-- Ad ends -->
+
+            <hr>
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h3>Settings</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>Here settings can be configured...</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                            <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <!--/.fluid-container-->
+
+    <!-- external javascript -->
+
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/bootstrap-table/bootstrap-table.js"></script>
+    <script src="js/bootstrap-table-zh-CN.js"></script>
+    <!-- library for cookie management -->
+    <script src="js/jquery.cookie.js"></script>
+    <!-- calender plugin -->
+    <script src='bower_components/moment/min/moment.min.js'></script>
+    <script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+    <!-- data table plugin -->
+    <script src='js/jquery.dataTables.min.js'></script>
+    <!--<script src="table.js"></script>-->
+    <!-- select or dropdown enhancer -->
+    <script src="bower_components/chosen/chosen.jquery.min.js"></script>
+    <!-- plugin for gallery image view -->
+    <script src="bower_components/colorbox/jquery.colorbox-min.js"></script>
+    <!-- notification plugin -->
+    <script src="js/jquery.noty.js"></script>
+    <!-- library for making tables responsive -->
+    <script src="bower_components/responsive-tables/responsive-tables.js"></script>
+    <!-- tour plugin -->
+    <script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+    <!-- star rating plugin -->
+    <script src="js/jquery.raty.min.js"></script>
+    <!-- for iOS style toggle switch -->
+    <script src="js/jquery.iphone.toggle.js"></script>
+    <!-- autogrowing textarea plugin -->
+    <script src="js/jquery.autogrow-textarea.js"></script>
+    <!-- multiple file upload plugin -->
+    <script src="js/jquery.uploadify-3.1.min.js"></script>
+    <!-- history.js for cross-browser state change on ajax -->
+    <script src="js/jquery.history.js"></script>
+    <!-- application script for Charisma demo -->
+    <script src="js/charisma.js"></script>
+    <script src="js/artDialog.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="commonOption.js"></script>
+    <script src="js/base.js"></script>
+    
+
+    <script>
+        //$('#datetimepicker').datetimepicker('setStartDate', '2012-01-01');
+        //$('#datetimepicker').datetimepicker('update', new Date());
+        var newDate = new Date();
+        $("#start").datetimepicker({
+            language: 'zh-CN',
+            todayBtn: true,
+        })
+        $('#start').datetimepicker('update', newDate);
+
+        $("#end").datetimepicker({
+            language: 'zh-CN',
+            todayBtn: true,
+        })
+        newDate.setDate(newDate.getDate() + 7);
+        $('#end').datetimepicker('update', newDate);
+
+        $(".table_columns_switch").on('click ', function () {
+            var i = $(this).find('input').val();
+            $(".table-striped-" + i).show().siblings('table').hide();
+        });
+
+        var showSwitch = function () {
+            $("#myModalxxx").modal();
+        }
+
+        //Bootstrap-Table 配置信息
+
+        jQuery.support.cors = true; //跨域
+        $(function () {
+            //http://10.0.0.140:81/Common/NewGuid  获取新的id  （后台api--获取新的Guid）
+            $.get("http://10.0.0.140:81/Common/NewGuid", function (res) {
+                $('#add').attr("href","gameBulletinPlan.html?"+res)
+            }); 
+            // onclick="location.href='gameBulletinPlan.html'"
+            oTableInit.method = "get";
+            oTableInit.singleSelect=true;
+            //  oTableInit.rowStyle=function rowStyle() { return { classes: (row.IsReview ? "text-success" : "text-danger") }; }
+            // oTableInit.rowStyle=function rowStyle() { return { csses: {"width":"100%"} }}
+            oTableInit.columns = [ //,cellStyle: function() { return { css: { "max-width": "200px" } } }
+                // {checkbox:true},
+                {
+                    field: 'NoticeID',
+                    title: '公告ID',
+                    visible: false
+                },
+                {
+                    field: 'NoticeTitle',
+                    title: '公告名字'
+                },
+                //  { field: 'NoticeContent', title: '公告内容',formatter(value, row, index) {
+                //          return  "<span style='white-space:wrap;>"+value+"</span>";  
+                //     }},
+                //,cellStyle: function() { return { css: { "max-width": "500px" ,"overflow":"hidden","white-space":"wrap"}
+                {
+                    field: 'NoticeContent',
+                    title: '公告内容',
+                    // formatter(value, row, index) {
+                    //     return "<textare row='5' style='display:block'>" + value + "</textare>";
+                    // },
+                    cellStyle: function () {
+                        return {
+                            //display: -webkit-box;
+
+                            css: {
+                                "max-width": "800px",
+                                "overflow": "hidden",
+                                // "white-space": "wrap"
+                                "text-overflow": "ellipsis",
+                                // "white-space": "nowrap",
+                                "-webkit-box-orient": "vertical",
+                                "-webkit-line-clamp": 3,
+                                // "display":"-webkit-box",
+                                // "word-break":"break-all",
+                                // "WORD-WRAP": "break-word"
+                            }
+                        }
+                    }
+                },
+                {
+                    field: 'NoticeStartTime',
+                    title: '公告开始时间'
+                },
+                {
+                    field: 'NoticeEndTime',
+                    title: '公告结束时间'
+                },
+                {
+                    field: 'CreateTime',
+                    title: '创建时间'
+                },
+                {
+                    field: "",
+                    title: "操作",
+                    formatter: operate_formatter
+                }
+            ];
+            oTableInit.dataType = "json";
+
+            //得到查询的参数
+            oTableInit.queryParams = function (params) {
+                var temp = { //这里的键的名字和控制器的变量名必须一直，这边改动，控制器也需要改成一样的
+                    limit: params.limit, //页面大小
+                    offset: params.offset, //页码
+                    title: $("#playerNum").val(),
+                    start: $("#start").val(),
+                    end: $("#end").val()
+                };
+                return temp;
+            };
+
+            oTableInit.url = "http://10.0.0.140:81/GameNotice/GetListAll";
+
+
+            $("#table").bootstrapTable('destroy'); //渲染之前 销毁1次
+            $('#table').bootstrapTable(oTableInit); //渲染
+            // $.ajax({
+            //     url: "http://10.0.0.140:81/GameNotice/GetListAll",
+            //     type: "get",
+            //     // cache:false,
+            //     dataType: "JSON",
+            //     success: function (res) {
+            //         oTableInit.data = res;
+            //         $('#table').bootstrapTable(oTableInit);
+            //     },
+            //     error: function (msg) {
+            //         console.error(msg);
+            //     }
+            // });
+        })
+
+
+
+        //活动类型下拉框获取数据 传输数据事件
+        function selectEvent() {
+            //清空原有select内的数据
+            $("#indexSearch").empty();
+            $.ajax({
+                url: "",
+                type: "get",
+                dataType: "json",
+                success: function (data) {
+                    $("#indexSearch").append("<option value='-1'>--请选择--</option>");
+                    //遍历 json为{id:"00",text:"aa".....},{id:"01",text:"bb".....}
+                    $.each(data, function (index, item) {
+                        var id = data[index].id;
+                        var text = data[index].text;
+                        $("#indexSearch").append("<option value='" + id + "'>" + text + "</option>");
+                    });
+                },
+                // error:function(XMLHttpRequest,textStatus, errorThrown) { 
+                // alert(errorThrown);
+                //  }
+            });
+        }
+
+        function operate_formatter(value, row, index) {
+
+            return [
+                '<a class="btn btn-xs green" href="gameBulletinPlan.html?' + row.NoticeID +'" title="修改" data-id="' + row.NoticeID + '">修改</a>  ',
+                '<a class="btn btn-xs red" href="javascript:;" onclick="delete_user(\'' + row.NoticeID +'\')" title="删除" data-id="' + row.NoticeID + '" >删除</a>'
+            ].join('');
+        }
+
+
+        //删除用户信息
+        function delete_user(NoticeID) {
+            if (confirm('确定要删除此公告吗？')) {
+                //发送请求提交后台
+                $.ajax({
+                    url: 'http://10.0.0.140:81/GameNotice/Delete', //后台删除用户方法
+                    data: {
+                        "id": NoticeID, //后台传过来的id名字
+                    },
+                    dataType: 'json',
+                    type: 'get',
+                    success: function (msg) {
+                        if (msg == "1") {
+                            $('#table').bootstrapTable("refresh"); //刷新 
+                            alert('删除成功');
+
+                        } else {
+                            alert("请刷新后重试！")
+                        }
+                    }
+
+                })
+            }
+        }
+    </script>
+
+
+
+
+</body>
+
+</html>

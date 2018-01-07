@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <!--
+        ===
+        This comment should NOT be removed.
+
+        Charisma v2.0.0
+
+        Copyright 2012-2014 Muhammad Usman
+        Licensed under the Apache License v2.0
+        http://www.apache.org/licenses/LICENSE-2.0
+
+        http://usman.it
+        http://twitter.com/halalit_usman
+        ===
+    -->
+    <meta charset="utf-8">
+    <title>角色查询</title>
+    <style>
+        .confirm-model {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 999;
+            background-color: rgba(55, 55, 55, .6);
+        }
+
+        .confirm-model {
+            display: none;
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            width: 507px;
+            margin-left: -254px;
+        }
+
+        .d-dialog {
+            background-color: gray !important;
+        }
+    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+    <meta name="author" content="Muhammad Usman">
+
+    <!-- The styles -->
+    <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet">
+
+    <link href="css/charisma-app.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href='bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='bower_components/bootstrap-table/bootstrap-table.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap-switch/4.0.0-alpha.1/css/bootstrap-switch.css">
+    <link href='css/jquery.noty.css' rel='stylesheet'>
+    <link href='css/noty_theme_default.css' rel='stylesheet'>
+    <link href='css/elfinder.min.css' rel='stylesheet'>
+    <link href='css/elfinder.theme.css' rel='stylesheet'>
+    <link href='css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='css/uploadify.css' rel='stylesheet'>
+    <link href='css/animate.min.css' rel='stylesheet'>
+
+    <!-- jQuery -->
+    <script src="bower_components/jquery/jquery.min.js"></script>
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- The fav icon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+</head>
+
+<body>
+    <script src="common.js"></script>
+    <div class="ch-container">
+        <div class="row">
+            <div id="content" class="col-lg-10 col-sm-10">
+                <!-- content starts -->
+                <div>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">Home</a>
+                        </li>
+                        <li>
+                            <a href="#">Tables</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="row">
+                    <div class="box col-md-12">
+                        <div class="box-inner">
+                            <div class="portlet-body">
+                                <!-- 搜索区 -->
+                                <form class="slot-filter row" role="form" id="search_form" onsubmit="return false;">
+                                    <div class="slot-filter-date col-md-2">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" id="playerNum" placeholder="请输入玩家帐号">
+                                        </div>
+                                    </div>
+                                    <div class="slot-filter-date col-md-2">
+                                        <input class="form-control" type="text" id="userID" placeholder="请输入角色ID">
+                                    </div>
+                                    <div class="slot-filter-date col-md-2">
+                                        <select id="indexSearch" class="form-control">
+                                            <option value="0">模糊查询</option>
+                                            <option value="1">111</option>
+                                            <option value="2">222</option>
+                                            <option value="3">333</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-search">查询</button>
+                                        <button type="reset" class="btn btn-default">清除</button>
+                                        <button type="button" onclick="location.href='roleQuery.html'" class="btn btn-default">添加</button>
+                                        <button type="reset" class="btn btn-default" onclick="playerMsg()">弹出按钮
+                                            <!--<a href="" onclick="playerMsg()">角色ID</a>-->
+                                        </button>
+
+                                        <button type="reset" class="btn btn-default" onclick="playerMsg2()">弹出按钮2
+                                        </button>
+                                        <button type="submit" class="btn" onclick="block()">封禁测试</button>
+                                        <button type="submit" class="btn" onclick="unblock()">解封测试</button>
+                                        <!--<input name="status" type="checkbox" data-size="small">-->
+                                    </div>
+                                </form>
+
+
+                                <!--table-->
+                                <div class="btn-group" id="tableToolbar">
+                                </div>
+                                <table id="table">
+                                    <thead>
+                                        <tr>
+                                            <!--<th data-field="state" data-checkbox="true"></th>-->
+                                            <th data-field="player_id">角色ID</th>
+                                            <th data-field="player_nickname">昵称</th>
+                                            <th data-field="player_gag" data-formatter="operate_player_gag">禁言</th>
+                                            <th data-field="player_level">等级</th>
+                                            <th data-field="player_number">帐号</th>
+                                            <th data-field="player_server">服务器</th>
+                                            <th data-field="player_platform">发布平台（渠道）</th>
+                                            <th data-field="player_money">充值金额</th>
+                                            <th data-field="player_falseMoney">虚拟充值</th>
+                                            <th data-field="player_VIP">VIP</th>
+                                            <th data-field="player_haveDiamond">持有钻石</th>
+                                            <th data-field="player_haveMoney">持有金币</th>
+                                            <th data-field="player_power">体力</th>
+                                            <!--<th data-field="player_status">状态</th>-->
+                                            <th data-field="operate" data-formatter="operate_formatter" data-align="center">操作</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                                <!--/.table./-->
+
+                            </div>
+                        </div>
+                        <!--/span-->
+
+                    </div>
+                    <!--/row-->
+
+
+                    <!-- content ends -->
+                </div>
+                <!--/#content.col-md-0-->
+            </div>
+            <!--/fluid-row-->
+
+            <!-- Ad, you can remove it -->
+            <div class="row">
+                <div class="col-md-9 col-lg-9 col-xs-9 hidden-xs">
+                    <!--<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
+                    <!-- Charisma Demo 2 -->
+                    <ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5108790028230107" data-ad-slot="3193373905"></ins>
+                    <script>
+                        (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+                <div class="col-md-2 col-lg-3 col-sm-12 col-xs-12 email-subscription-footer">
+                    <!--<div class="mc_embed_signup">
+                    <form action="//halalit.us3.list-manage.com/subscribe/post?u=444b176aa3c39f656c66381f6&amp;id=eeb0c04e84" method="post" id="mc-embedded-subscribe-form"
+                        name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                        <div>
+                            <label>Keep up with my work</label>
+                            <input type="email" value="" name="EMAIL" class="email" placeholder="Email address" required>
+
+                            <div class="power_field"><input type="text" name="b_444b176aa3c39f656c66381f6_eeb0c04e84" tabindex="-1" value=""></div>
+                            <div class="clear"><input type="submit" value="Subscribe" name="subscribe" class="button"></div>
+                        </div>
+                    </form>
+                </div>-->
+
+                    <!--End mc_embed_signup-->
+                </div>
+
+            </div>
+            <!-- Ad ends -->
+
+            <hr>
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h3>Settings</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>Here settings can be configured...</p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+                            <a href="#" class="btn btn-primary" data-dismiss="modal">Save changes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="modal fade" id="playerMsg" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header" style="border-bottom:0">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                        <h4 class="modal-title" id="myModalLabel1">装备</h4>
+                    </div>
+                    <!--<div class="modal-body">
+                        <div id="showSwitch">
+                            <div class="btn-group" id="modaltableToolbar">
+                                <div class="btn-group" data-toggle="buttons">
+
+                                    <label class="btn btn-default active table_columns_switch" data-columns="">
+                                    <input type="radio" class="toggle" value="1"> <i class="fa fa-table"></i> 上阵英雄 </label>
+                                    <label class="btn btn-default table_columns_switch">
+                                    <input type="radio" class="toggle" value="2"> <i class="fa fa-table"></i> 上阵英雄装备 </label>
+                                    <label class="btn btn-default table_columns_switch">
+                                    <input type="radio" class="toggle" value="3"> <i class="fa fa-table" ></i> 拥有英雄 </label>
+                                    <label class="btn btn-default table_columns_switch">
+                                    <input type="radio" class="toggle" value="4"> <i class="fa fa-table" ></i> 背包道具及装备 </label>
+                                </div>
+
+                            </div>
+                            <table class="table table-striped-1">
+                                <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>姓名</th>
+                                        <th>年龄</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>001</td>
+                                        <td>郭靖</td>
+                                        <td>25</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <table class="table table-striped-2" style="display:none">
+                                <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>姓名</th>
+                                        <th>年龄</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>002</td>
+                                        <td>黄蓉</td>
+                                        <td>23</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <table class="table table-striped-3" style="display:none">
+                                <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>姓名</th>
+                                        <th>年龄</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>003</td>
+                                        <td>杨过</td>
+                                        <td>24</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-striped-4" style="display:none">
+                                <thead>
+                                    <tr>
+                                        <th>编号</th>
+                                        <th>姓名</th>
+                                        <th>年龄</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <td>003</td>
+                                        <td>哈哈</td>
+                                        <td>24</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>-->
+                </div>
+            </div>
+        </div>
+
+        <!--封禁开始-->
+        <div class="modal fade" id="blockModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalBlock" style="font-weight:bolder">封禁操作</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form" style="" action="">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">是否封禁</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="play_block" id="optionBlock1" value="1" > 封禁
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="play_block" id="optionNormal1"  value="2" checked> 正常
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">封禁原因</label>
+                                <div class="col-sm-4">
+                                    <textarea name="" id="block_reason" cols="40" rows="5" ></textarea>
+                                </div>
+                            </div>
+                            <!--<div class="form-group modal-footer">
+                                <div class="col-sm-offset-1 col-sm-1">
+                                    <button type="submit" class="btn btn-primary">保存</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div>-->
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" id="blockModalSubmits">提交更改</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            </div>
+                            <!--name play_id 玩家的id 隐藏表单传给后台-->
+                            <input type="hidden" name="player_id" value="" id="play_id">
+                        </form>
+                    </div>
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+        <!--封禁结束-->
+
+        <!--解禁开始-->
+        <div class="modal fade" id="unblockModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="myModalUnblick" style="font-weight:bolder">解禁操作</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form" style="" action="">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">是否解禁</label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="play_unblock" id="optionBlock2" value="1" checked> 封禁
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="play_unblock" id="optionNormal2"  value="2"> 正常
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">解禁原因</label>
+                                <div class="col-sm-4">
+                                    <textarea name="" id="unblock_reason" cols="40" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" id="unblockModalSubmit">提交更改</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                            </div>
+                            <input type="hidden" name="player_id" value="" id="player_un_id">
+                        </form>
+                    </div>
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+        <!--解禁结束-->
+
+        <!--禁言确定开始-->
+        <div class="modal fade" id="timeLengthInput" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="timeLength" style="font-weight:bolder">禁言操作</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form" style="" id="formId">
+                                <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">请输入禁言时长</label>
+                                <div class="col-sm-3">
+                                    <!--设置开始到结束时间内，每隔多久发送一次-->
+                                    <input type="text" name="player_gag_time" class="form-control" id="player_gag_time">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">禁言原因</label>
+                                <div class="col-sm-4">
+                                    <textarea name="player_gag_reason" cols="40" rows="5" id="player_gag_reason"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="btn-ok">确定</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            </div>
+                            <input type="hidden" name="player_gag" value="1">
+                            <input type="hidden" name="player_id" value="" id="player_gag_id">
+                        </form>
+                    </div>
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+        <!--禁言确定结束-->
+
+        <!--修改用户资料开始-->
+        <div class="modal fade" id="edit_user_info" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="edit_user" style="font-weight:bolder">修改用户资料操作</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" role="form" style="" id="form_edit_user">
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">请输入昵称</label>
+                                <div class="col-sm-3">
+                                    <!--设置开始到结束时间内，每隔多久发送一次-->
+                                    <input type="text" id="player_nickname" name="player_nickname" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">请输入持有钻石</label>
+                                <div class="col-sm-3">
+                                    <!--设置开始到结束时间内，每隔多久发送一次-->
+                                    <input type="text" id="player_haveDiamond" name="player_haveDiamond" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">请输入持有金币</label>
+                                <div class="col-sm-3">
+                                    <!--设置开始到结束时间内，每隔多久发送一次-->
+                                    <input type="text" id="player_haveMoney" name="player_haveMoney" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">请输入体力</label>
+                                <div class="col-sm-3">
+                                    <!--设置开始到结束时间内，每隔多久发送一次-->
+                                    <input type="text" id="player_power" name="player_power" class="form-control">
+                                </div>
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" id="edit_user_btn_ok">确定</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            </div>
+                            <input type="hidden" name="player_id" value="" id="edit_user_player_id">
+                        </form>
+                    </div>
+
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+        <!--修改用户资料结束-->
+
+        <div class="modal fade" id="playerMsg2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <!--<div class="modal-header" style="border-bottom:0">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                            <h4 class="modal-title" id="myModalLabel">选择区服</h4>
+                                        </div>-->
+                                        <!--可进行公共部分的区服选择-->
+                                        <!--<script src="commonModal_pipe.js"></script>-->
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">选择区服</h4>
+                                        </div>
+                                        <div class="modal-body" style="font-size:12px;">
+                                            <form class="form-horizontal" role="form" style="" action="">
+                                                <table style="width:100%;border-bottom:1px dashed gray">
+                                                    <style>
+                                                        body,
+                                                        th,
+                                                        td {
+                                                            margin: 0;
+                                                            padding: 0
+                                                        }
+
+                                                        table {
+                                                            border-collapse: collapse;
+                                                            border-spacing: 0
+                                                        }
+                                                    </style>
+                                                    <h5>上阵英雄
+                                                        <input type="checkbox" id="all">
+                                                        <!--<input type="button" value="全选" class="btn" id="selectAll">
+                                                    <input type="button" value="全不选" class="btn" id="unSelect">
+                                                    <input type="button" value="反选" class="btn" id="reverse">
+                                                    <input type="button" value="获得选中的所有值" class="btn" id="getValue">-->
+                                                    </h5>
+                                                    <tr id="list">
+                                                        <td><input type="checkbox" value="1" name="platform" id="" /></td>
+                                                        <td><label>英雄1号</label></td>
+                                                        <td><input type="checkbox" value="2" name="platform" id="" /></td>
+                                                        <td><label>英雄2号</label></td>
+                                                        <td><input type="checkbox" value="3" name="platform" id="" /></td>
+                                                        <td><label>英雄3号</label></td>
+                                                        <td><input type="checkbox" value="4" name="platform" id="" /></td>
+                                                        <td><label>英雄4号</label></td>
+                                                        <td><input type="checkbox" value="5" name="platform" id="" /></td>
+                                                        <td><label>英雄5号</label></td>
+                                                    </tr>
+                                                </table>
+                                                <table style="width:100%;border-bottom:1px dashed gray">
+                                                    <style>
+                                                        body,
+                                                        th,
+                                                        td {
+                                                            margin: 0;
+                                                            padding: 0
+                                                        }
+
+                                                        table {
+                                                            border-collapse: collapse;
+                                                            border-spacing: 0
+                                                        }
+                                                    </style>
+                                                    <h5>上阵英雄装备
+                                                        <input type="checkbox" id="all2">
+                                                        <!--<input type="button" value="全选" class="btn" id="selectAll2">
+                                                    <input type="button" value="全不选" class="btn" id="unSelect2">
+                                                    <input type="button" value="反选" class="btn" id="reverse2">
+                                                    <input type="button" value="获得选中的所有值" class="btn" id="getValue2">-->
+                                                    </h5>
+                                                    <tr id="list2">
+                                                        <td><input type="checkbox" value="1" class="" name="platform" id="" /></td>
+                                                        <td><label>装备1</label></td>
+                                                        <td><input type="checkbox" value="2" class="" name="platform" id="" /></td>
+                                                        <td><label>装备2</label></td>
+                                                        <td><input type="checkbox" value="3" class="" name="platform" id="" /></td>
+                                                        <td><label>装备3</label></td>
+                                                        <td><input type="checkbox" value="4" class="" name="platform" id="" /></td>
+                                                        <td><label>装备4</label></td>
+                                                        <td><input type="checkbox" value="5" class="" name="platform" id="" /></td>
+                                                        <td><label>装备5</label></td>
+                                                        <td><input type="checkbox" value="6" class="" name="platform" id="" /></td>
+                                                        <td><label>装备6</label></td>
+                                                    </tr>
+                                                </table>
+                                                <table style="width:100%;border-bottom:1px dashed gray">
+                                                    <style>
+                                                        body,
+                                                        th,
+                                                        td {
+                                                            margin: 0;
+                                                            padding: 0
+                                                        }
+
+                                                        table {
+                                                            border-collapse: collapse;
+                                                            border-spacing: 0
+                                                        }
+                                                    </style>
+                                                    <h5>拥有英雄
+                                                        <input type="checkbox" id="all3">
+                                                        <!--<input type="button" value="全选" class="btn" id="selectAll">
+                                                    <input type="button" value="全不选" class="btn" id="unSelect">
+                                                    <input type="button" value="反选" class="btn" id="reverse">
+                                                    <input type="button" value="获得选中的所有值" class="btn" id="getValue">-->
+                                                    </h5>
+                                                    <tr id="list3">
+                                                        <td><input type="checkbox" value="1" name="platform" id="" /></td>
+                                                        <td><label>英雄1号</label></td>
+                                                        <td><input type="checkbox" value="2" name="platform" id="" /></td>
+                                                        <td><label>英雄2号</label></td>
+                                                        <td><input type="checkbox" value="3" name="platform" id="" /></td>
+                                                        <td><label>英雄3号</label></td>
+                                                        <td><input type="checkbox" value="4" name="platform" id="" /></td>
+                                                        <td><label>英雄4号</label></td>
+                                                    </tr>
+                                                </table>
+                                                <table style="width:100%;border-bottom:1px dashed gray">
+                                                    <style>
+                                                        body,
+                                                        th,
+                                                        td {
+                                                            margin: 0;
+                                                            padding: 0
+                                                        }
+
+                                                        table {
+                                                            border-collapse: collapse;
+                                                            border-spacing: 0
+                                                        }
+                                                    </style>
+                                                    <h5>背包道具及装备
+                                                        <input type="checkbox" id="all6">
+                                                        <!--<input type="button" value="全选" class="btn" id="selectAll">
+                                                    <input type="button" value="全不选" class="btn" id="unSelect">
+                                                    <input type="button" value="反选" class="btn" id="reverse">
+                                                    <input type="button" value="获得选中的所有值" class="btn" id="getValue">-->
+                                                    </h5>
+                                                    <tbody id="list6">
+                                                        <tr id="list4">
+                                                        <td><input type="checkbox" id="all4">道具</td>
+                                                        <td><input type="checkbox" value="1" name="platform" id="" /></td>
+                                                        <td><label>道具1</label></td>
+                                                        <td><input type="checkbox" value="2" name="platform" id="" /></td>
+                                                        <td><label>英雄2号</label></td>
+                                                        <td><input type="checkbox" value="3" name="platform" id="" /></td>
+                                                        <td><label>英雄3号</label></td>
+                                                        <td><input type="checkbox" value="4" name="platform" id="" /></td>
+                                                        <td><label>英雄4号</label></td>
+                                                        <td><input type="checkbox" value="5" name="platform" id="" /></td>
+                                                        <td><label>英雄5号</label></td>
+                                                    </tr>
+                                                    
+                                                    <tr id="list5">
+                                                        <td><input type="checkbox" id="all5">装备</td>
+                                                        <td><input type="checkbox" value="1" name="platform" id="" /></td>
+                                                        <td><label>装备1</label></td>
+                                                        <td><input type="checkbox" value="2" name="platform" id="" /></td>
+                                                        <td><label>英雄2号</label></td>
+                                                        <td><input type="checkbox" value="3" name="platform" id="" /></td>
+                                                        <td><label>英雄3号</label></td>
+                                                        <td><input type="checkbox" value="4" name="platform" id="" /></td>
+                                                        <td><label>英雄4号</label></td>
+                                                        <td><input type="checkbox" value="5" name="platform" id="" /></td>
+                                                        <td><label>英雄5号</label></td>
+                                                    </tr>
+                                                    </tbody>
+                                                    
+                                                </table>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-primary">确定</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <!--区服内容结束-->
+                                    </div>
+                                </div>
+                            </div>
+    </div>
+
+
+
+    <!--/.fluid-container-->
+
+    <!-- external javascript -->
+
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/bootstrap-table/bootstrap-table.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-switch/4.0.0-alpha.1/js/bootstrap-switch.js"></script>
+
+    <!-- library for cookie management -->
+    <script src="js/jquery.cookie.js"></script>
+    <!-- calender plugin -->
+    <script src='bower_components/moment/min/moment.min.js'></script>
+    <script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+    <!-- data table plugin -->
+    <script src='js/jquery.dataTables.min.js'></script>
+    <!--<script src="table.js"></script>-->
+    <!-- select or dropdown enhancer -->
+    <script src="bower_components/chosen/chosen.jquery.min.js"></script>
+    <!-- plugin for gallery image view -->
+    <script src="bower_components/colorbox/jquery.colorbox-min.js"></script>
+    <!-- notification plugin -->
+    <script src="js/jquery.noty.js"></script>
+    <!-- library for making tables responsive -->
+    <script src="bower_components/responsive-tables/responsive-tables.js"></script>
+    <!-- tour plugin -->
+    <script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+    <!-- star rating plugin -->
+    <script src="js/jquery.raty.min.js"></script>
+    <!-- for iOS style toggle switch -->
+    <script src="js/jquery.iphone.toggle.js"></script>
+    <!-- autogrowing textarea plugin -->
+    <script src="js/jquery.autogrow-textarea.js"></script>
+    <!-- multiple file upload plugin -->
+    <script src="js/jquery.uploadify-3.1.min.js"></script>
+    <!-- history.js for cross-browser state change on ajax -->
+    <script src="js/jquery.history.js"></script>
+    <!-- application script for Charisma demo -->
+    <script src="js/charisma.js"></script>
+    <script src="js/artDialog.min.js"></script>
+    <script src="js/base.js"></script>
+    <script src="commonModal_pipeJS.js"></script>
+
+    <script>
+        $(".table_columns_switch").on('click ', function () {
+            var i = $(this).find('input').val();
+            $(".table-striped-" + i).show().siblings('table').hide();
+        });
+
+        function playerMsg() {
+            $("#playerMsg").modal('show');
+        }
+
+        function playerMsg2(){
+            $("#playerMsg2").modal('show');
+        }
+
+        //封禁时传过来的player_id
+        function block(play_id) {
+            $("#play_id").val(play_id);//将传来的player_id赋值给模态框中角色id隐藏域的value
+            $('#blockModal').modal('show');
+        }
+
+        //封禁提交按钮获取值
+        $("#blockModalSubmits").click(function(){
+            $.ajax({
+                url:'',
+                data:{
+                    "paly_id":$("#play_id").val(),
+                    "blockStatus":$("input[name=play_block]:checked").val(),
+                    "block_reason":$("#block_reason").val()
+                },
+                dataType:'json',
+                type:'get',
+                success:function(msg){
+                    if(msg=="1"){
+                        alert('封禁成功');
+                        $("input[name=play_block]:checked").val("");
+                        $("#block_reason").val("");
+                    }
+                }
+            })
+        })
+        //解禁时传过来的player_id
+        function unblock(player_un_id) {
+            $("#player_un_id").val(player_un_id);
+            $('#unblockModal').modal('show');
+        }
+        //封禁提交按钮取值
+        $("#unblockModalSubmit").click(function(){
+            $.ajax({
+                url:'',
+                data:{
+                    "paly_id":$("#play_id").val(),
+                    "unblockStatus":$("input[name=play_unblock]:checked").val(),
+                    "unblock_reason":$("#unblock_reason").val()
+                },
+                dataType:'json',
+                type:'get',
+                success:function(){
+                    alert("解禁成功");
+                    $("input[name=play_unblock]:checked")[0].checked=false;
+                    $("#unblock_reason").val("");
+                }
+            })
+        })
+
+        $("#btn-ok").on('click',function(){
+            //发送后台请求  禁言用户  或者解除用户禁言
+            player_gag_request(0);
+        });
+
+        var toggleStatus = true;
+
+        function player_gag_request(type)  //type参数  为0时表示禁言 data数据为form表单的数据 不为0时为用户id
+        {
+            // var form_data = $("#formId").serialize();   //禁言弹框里禁言表单序列化
+            // var data = type ? {player_id:type,player_gag:1}  : form_data;   //data是根据传进来的type判断的
+            // var player_id = type ? type : $('#player_gag_id').val();   
+
+            //player_gag 表示当前为禁言或者解禁操作行为   后台如精确到禁言操作方法则不需传
+            $.ajax({
+                url:'/test.php',
+                // data:data,//id 0/1 时长 内容
+                data:{
+                    "play_id":$("#play_id").val(),
+                    "player_gag_time":$("#player_gag_time").val(),
+                    "player_gag_reason":$("#player_gag_reason").val(),
+                    "player_gag":type
+                },
+                dataType:'json',
+                type:'post',
+                success: function (msg) {
+
+                    if(parseInt(msg.status) === 1){
+                        //操作成功
+                        alert(msg.info);
+                        toggleStatus = true;
+                        if(!type){
+                            $('#timeLengthInput').modal('hide');
+
+                        }else{
+                            toggleStatus = true;
+                        }
+
+                    }
+                }
+            })
+        }
+
+        //禁言是传过来的player_id
+        function timeLength(player_id){
+            $('#player_gag_id').val(player_id);
+            $('#timeLengthInput').attr('player_id',player_id).modal('show'); //把弹框调起来的同时 把玩家的id赋值在弹框的属性上
+        }
+        setTimeout(function(){
+            $.fn.bootstrapSwitch.defaults.size = 'large';
+            $.fn.bootstrapSwitch.defaults.onColor = 'success';
+
+            $(".operate_player_gag").bootstrapSwitch({
+                onText: "是",
+                offText: "否",
+                onColor: "success",
+                offColor: "info",
+                size: "normal",
+                handleWidth:'auto',
+                onSwitchChange: function (event, state) {
+                    if (state == true) {
+
+                        toggleStatus = false;
+                        timeLength($(this).attr('player_id'))
+                    } else {
+                        //将用户id传到player_gag_request方法 请求后台 解除用户禁言状态
+                        if(toggleStatus){
+                            player_gag_request($(this).attr('player_id'));
+                        }
+                    }
+                }
+            }).show();
+        },450);
+
+        //模态框取消事件
+        $('#timeLengthInput').on('hide.bs.modal', function () {
+            // 执行一些动作...
+//            alert('关闭了');
+            if(!toggleStatus){
+                var modal_player_id = $(this).attr('player_id');  //当前模态框取消的用户id
+                $("input[name=status_"+modal_player_id+"]").bootstrapSwitch('toggleState');
+            }
+            toggleStatus = true;
+        });
+        
+        //对于禁言中每一行的操作按钮    
+        //未完成 ---------对于 input 里name=status绑定开关的方法（方法里是要传入player_gag/状态的） 同时里面判断这个status 如果是false就toggle转换一下
+        function operate_player_gag(value, row, index) {
+            var player_gag_check = row['player_gag'];//true 禁言中  false 正常   //中括号里的status是需要跟后台进行商议 对于状态的单词定义
+            var player_id=row['player_id'];
+            var btn;
+            var check = parseInt(player_gag_check)===1 ? 'checked' : '';
+                                                                                                                                    //将角色id赋值给input属性player_id
+            btn='<input style="display:none" '+check+' name="status_'+player_id+'" class="operate_player_gag" type="checkbox" data-size="small" player_id="'+player_id+'">' 
+            return[
+                btn
+            ].join('');
+        }
+
+        //修改用户信息
+        function edit_user(player_id,player_nickname,player_haveDiamond,player_haveMoney,player_power){
+            console.log('player_id:'+player_id+',player_nickname:'+player_nickname);
+            $("#player_nickname").val(player_nickname);
+            $("#edit_user_player_id").val(player_id);
+            $("#player_haveDiamond").val(player_haveDiamond);
+            $("#player_haveMoney").val(player_haveMoney);
+            $("#player_power").val(player_power);
+
+            $("#edit_user_info").modal();
+        }
+
+        //修改用户信息确认后的表单提交
+        $("#edit_user_player_id").click(function(){
+            $.ajax({
+                url:'',//后台修改用户信息接口地址
+                data:$("#form_edit_user").serialize(),
+                dataType:'json',
+                type:'post',
+                success:function(msg){
+                    if(msg.status == 1){   //返回的status=1表示修改成功 及关闭修改模态框 提示修改成功
+                        $("#edit_user_info").modal('hide');
+                    }
+                }
+
+            })
+        });
+
+        //删除用户信息
+        function delete_user(player_id){
+            if(confirm('确定删除玩家ID为'+player_id+'的用户吗？')){
+                //发送请求提交后台
+                $.ajax({
+                    url:'',//后台删除用户方法
+                    data:{player_id:player_id},
+                    dataType:'json',
+                    type:'post',
+                    success:function(msg){
+                        if(msg.status == 1){
+                            alert('删除成功');
+                        }
+                    }
+
+                })
+            }
+        }
+
+        // 操作按钮--<th data-field="operate" data-formatter="operate_formatter" data-align="center">操作</th>
+        function operate_formatter(value, row, index) {
+            var status = row['status']; //中括号里的status是需要跟后台进行商议 对于状态的单词定义
+            var player_id = row['player_id']; //获取玩家id
+            var player_nickname = row['player_nickname'];
+            var player_haveDiamond = row['player_haveDiamond'];
+            var player_haveMoney = row['player_haveMoney'];
+            var player_power = row['player_power'];
+//            var users = JSON.stringify(row);
+            var bt;
+            if (parseInt(status) === 1) {
+                bt = '<a class="btn btn-xs green" onclick="block('+player_id+')" href="javascript:;" title="封禁">封禁</a>'
+            } else {
+                bt = '<a class="btn btn-xs red" href="javascript:;" onclick="unblock('+player_id+')" title="解封">解封</a>'
+            }
+            return [
+                bt,
+                 `<a class="btn btn-xs green" href="javascript:;" onclick="edit_user('${player_id}','${player_nickname}','${player_haveDiamond}','${player_haveMoney}','${player_power}')" title="修改">修改</a>`,
+                    //edit_user('${user}')   ${user}为定界符内变量表示   当前操作的用户信息
+                 `<a class="btn btn-xs red" href="javascript:;" onclick="delete_user('${player_id}')" title="删除">删除</a>`
+            ].join('');
+        }
+
+         //搜索查询                                    //角色id
+        init_bootstrap_table('#table', '/test.php', 'player_id', 'player_id', function (params) {
+            return { //搜索查询功能
+                limit: params.limit, //条数
+                offset: params.offset, //偏移量 （分页）
+                sort: params.sort, //排序字段
+                order: params.order, //排序方式   升序 或者  降序
+                playerNum: $('#playerNum', '#search_form').val(),
+                userID: $('#userID', '#search_form').val(),
+                indexSearch: $('#indexSearch', '#search_form').val()
+            };
+            }, { //options
+                pageList: [5,10,20],
+                pageSize: 20,
+                sortName: 'player_id', // 默认排序字段
+                sortOrder: 'asc', // 默认排序方式  升序
+                toolbar: '#tableToolbar'
+            });
+
+
+
+
+
+     
+    </script>
+
+
+
+
+</body>
+
+</html>

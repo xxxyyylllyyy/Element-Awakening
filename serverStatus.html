@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>游戏内公告</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Charisma, a fully featured, responsive, HTML5, Bootstrap admin template.">
+    <meta name="author" content="Muhammad Usman">
+
+    <!-- The styles -->
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link id="bs-css" href="css/bootstrap-cerulean.min.css" rel="stylesheet">
+
+    <link href="css/charisma-app.css" rel="stylesheet">
+    <link href='bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'>
+    <link href='bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'>
+    <link href='bower_components/chosen/chosen.min.css' rel='stylesheet'>
+    <link href='bower_components/colorbox/example3/colorbox.css' rel='stylesheet'>
+    <link href='bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'>
+    <link href='bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'>
+    <link href='css/jquery.noty.css' rel='stylesheet'>
+
+    <link href='css/noty_theme_default.css' rel='stylesheet'>
+    <link href='css/elfinder.min.css' rel='stylesheet'>
+    <link href='css/elfinder.theme.css' rel='stylesheet'>
+    <link href='css/jquery.iphone.toggle.css' rel='stylesheet'>
+    <link href='css/uploadify.css' rel='stylesheet'>
+    <link href='css/animate.min.css' rel='stylesheet'>
+    <link href='css/bootstrap-datetimepicker.min.css' rel='stylesheet'>
+    <link rel="stylesheet" type="text/css" href="css/webuploader.css">
+
+    <!-- jQuery -->
+    <script src="bower_components/jquery/jquery.min.js"></script>
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- The fav icon -->
+    <link rel="shortcut icon" href="img/favicon.ico">
+
+</head>
+
+<body>
+    <script src="common.js"></script>
+
+
+    <div id="content" class="col-lg-10 col-sm-10">
+        <!-- content starts -->
+        <div>
+            <div>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#">UI Features</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="box col-md-12">
+                <div class="box-inner">
+                    <div class="box-header well" data-original-title="">
+                        <h2><i class="glyphicon glyphicon-plus"></i>服务器状态</h2>
+
+                        <div class="box-icon">
+                            <a href="#" class="btn btn-minimize btn-round btn-default"><i
+                                class="glyphicon glyphicon-chevron-up"></i></a>
+                        </div>
+                    </div>
+                    <div class="box-content">
+
+                        <form class="form-horizontal col-sm-offset-1" role="form" style="">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">服务器</label>
+                                <div class="col-sm-1">
+                                    <button class="btn btn-default" type="button" onclick="showServer1()">请选择</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">状态</label>
+
+                                <label class="radio-inline">
+                                    <input type="radio" name="optionsRadiosinline" id="optionsRadios1" value="1">新服
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optionsRadiosinline" id="optionsRadios2"  value="2">火爆
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optionsRadiosinline" id="optionsRadios3"  value="3">维护
+                                </label>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-1">
+                                    <button type="submit" class="btn btn-primary">保存</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+                    <!-- 模态框（Modal） -->
+                    <div class="modal fade" id="myModalxxx1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <!--<div class="modal-header" style="border-bottom:0">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">新增</h4>
+                                </div>-->
+                                <script src="commonModal_pipe.js"></script>
+                                <!--modal内容部分开始-->
+
+                                <!--区服内容开始-->
+
+                                <!--区服内容结束-->
+
+                                <!--modal内容部分结束-->
+                                <!--弹出层-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.modal -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- library for cookie management -->
+    <script src="js/jquery.cookie.js"></script>
+    <!-- calender plugin -->
+    <script src='bower_components/moment/min/moment.min.js'></script>
+    <script src='bower_components/fullcalendar/dist/fullcalendar.min.js'></script>
+    <!-- data table plugin -->
+    <script src='js/jquery.dataTables.min.js'></script>
+
+    <!-- select or dropdown enhancer -->
+    <script src="bower_components/chosen/chosen.jquery.min.js"></script>
+    <!-- plugin for gallery image view -->
+    <script src="bower_components/colorbox/jquery.colorbox-min.js"></script>
+    <!-- notification plugin -->
+    <script src="js/jquery.noty.js"></script>
+    <!-- library for making tables responsive -->
+    <script src="bower_components/responsive-tables/responsive-tables.js"></script>
+    <!-- tour plugin -->
+    <script src="bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"></script>
+    <!-- star rating plugin -->
+    <script src="js/jquery.raty.min.js"></script>
+    <!-- for iOS style toggle switch -->
+    <script src="js/jquery.iphone.toggle.js"></script>
+    <!-- autogrowing textarea plugin -->
+    <script src="js/jquery.autogrow-textarea.js"></script>
+    <!-- multiple file upload plugin -->
+    <script src="js/jquery.uploadify-3.1.min.js"></script>
+    <!-- history.js for cross-browser state change on ajax -->
+    <script src="js/jquery.history.js"></script>
+    <!-- application script for Charisma demo -->
+    <script src="js/charisma.js"></script>
+    <script src="commonModal_pipeJS.js"></script>
+
+</body>
+
+<script>
+    function showServer1() {
+        panel("url", "#form_form_id1");
+        $("#myModalxxx1").modal('show');
+    }
+
+
+    //保存form表单事件
+    $("#broadcast").click(function () {
+        //服务器
+        var arr1 = [];
+        $.each($("#form_form_id1 tr input[type=checkbox]"), function (i, item) {
+            if ($(item)[0].checked == true) {
+                arr.push($(item).val());
+                console.log($(item).val());
+            }
+            //console.log($(item)[0].checked); //能获取所选的input;
+        });
+
+        $.ajax({
+            url: '', //需传给后台的地址
+            data: {
+                "arr1": arr1,
+                "status":$("input[name=optionsRadiosinline]:checked").val()
+            },
+            dataType: 'json',
+            type: 'post',
+            success: function (msg) {
+                // if(msg.status == 1){   //返回的status=1表示修改成功 及关闭修改模态框 提示修改成功
+                //     $("#edit_user_info").modal('hide');
+                // }
+                if (msg == "1") {
+                    alert("保存成功");
+                    //把表单里的值进行清空
+                    $("input[name=optionsRadiosinline]:checked").val(""); 
+                }
+
+            }
+
+        })
+    });
+
+
+    //渠道和服务器传参函数 **---获取后台给的值
+    function panel(url, id) {
+        $.ajax({
+            url: url,
+            dataType: 'json',
+            type: 'get',
+            success: function (msg) {
+                if (!mag) {
+                    $("#" + id).children().remove();
+                    var t = JSON.parse(msg); //转换成json
+                    var html = '';
+                    $.each(t, function (i, item) {
+                        // html += '<h5>' + item.title + '<input type="radio" class="all"></h5>';
+                        html += '<h5>' + item.title + '</h5>';
+                        html += '<table>'
+                        $.each(item, function (i1, item1) {
+                            html += '<td><input type="radio" value="' + item.Value +
+                                '" name="platform" id="" /></td><td><label>' + item.Name +
+                                '</label></td>';
+                        })
+                        html += '</table>';
+                    })
+                    $("#" + id).append(html);
+                }
+
+            }
+
+        });
+    }
+
+    //获取服务器状态
+    function getStatus() {
+        $.ajax({
+            url: "",
+            datatype: "json",
+            type: "get",
+            success: function (msg) {
+                if (!msg) {
+                    //获取状态赋值---赋值（返回的是数字--所以可直接写msg）
+                    $("input[value='" + msg + "']").attr("checked", "checked");
+                    $("input[name='optionsRadiosinline']").removeAttr("checked");
+                    $("input[value='" + msg + "']").click();
+                }
+            }
+        })
+    }
+</script>
+
+</html>
